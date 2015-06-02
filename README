@@ -1,0 +1,64 @@
+#####################################
+# Authors:
+# Stephane Meystre
+# stephane.meystre@hsc.utah.edu>
+#
+# Julien Charles Thibault
+# julien.thibault@utah.edu
+#
+# Oscar Ferrandez Escamez
+# oscar.ferrandez@utah.edu
+#
+#
+# Department of Biomedical Informatics, University of Utah
+#
+# Date: April 2010           
+#                            
+#####################################
+
+JavaConText 
+-----------
+JavaConText is a Java implementation of the ConText algorithm.
+
+References of the ConText algorithm:
+- Chapman WW, Dowling JN, Chu DL. ConText: An algorithm for identifying contextual features from clinical text. In: BioNLP Workshop of the Association for Computational Linguistics Prague, Czech Republic; 2007. p. 81-88.
+- Harkema H, Thornblade T, Dowling J, Chapman WW. Portability of ConText: An Algorithm for determining Negation, Experiencer, and Temporal Status from Clinical Reports. J Biomed Inform. 2009;42(5):839-851.
+
+JavaConText comes with a runnable Jar file, which implements a GUI for using and testing the ConText algorithm.
+JavaContext recognizes the local features of negation, temporality and experiencer, at sentence level. The concepts have to be specified as an input parameters of the algorithm.
+
+#####################################
+# Content:             
+#####################################
+This package includes:
+1)   Context.jar: the runnable jar file containing the GUI.
+     Concepts and sentences are taken as input parameters.     
+2)   ConText.zip: this file contains the sources of the ConText algorithm implementation as well as the GUI.
+     It can be imported as an Eclipse Java project.
+3)   README: this file.
+4)   LICENSE: the Apache 2.0 license.
+
+
+#####################################
+# License:	      
+#####################################
+
+Copyright 2012 Stephane Meystre, Julien Charles Thibault, Oscar Ferrandez Escamez
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+       http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and
+   limitations under the License.
+
+
+#####################################
+# To run the example:  
+#####################################
+Double click on the Context.jar file.
