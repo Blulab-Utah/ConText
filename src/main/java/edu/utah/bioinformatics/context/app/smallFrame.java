@@ -1,4 +1,4 @@
-package context.app;
+package edu.utah.bioinformatics.context.app;
 
 import java.awt.BorderLayout;
 import java.awt.Color;

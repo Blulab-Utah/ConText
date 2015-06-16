@@ -1,0 +1,2 @@
+Patient denies fever, but complains of headache.
+Family history of diabetes.

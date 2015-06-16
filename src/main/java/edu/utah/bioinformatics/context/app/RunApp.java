@@ -1,23 +1,14 @@
-package context.app;
+package edu.utah.bioinformatics.context.app;
 
-import java.awt.BorderLayout;
-import java.awt.Color;
-import java.awt.FlowLayout;
+import edu.utah.bioinformatics.context.ConText;
+
+import javax.swing.*;
+import javax.swing.border.LineBorder;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
- 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JScrollPane;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
-import javax.swing.border.LineBorder;
 
-import context.implementation.ConText;
- 
 /**
  * A java swing application to use the ConTex algorithm.
  * 
