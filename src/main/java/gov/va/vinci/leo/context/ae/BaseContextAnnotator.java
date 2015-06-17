@@ -3,6 +3,7 @@ package gov.va.vinci.leo.context.ae;
 import gov.va.vinci.leo.AnnotationLibrarian;
 import gov.va.vinci.leo.ae.LeoBaseAnnotator;
 import gov.va.vinci.leo.context.tools.AnnotatorConfiguration;
+import gov.va.vinci.leo.descriptors.LeoTypeSystemDescription;
 import gov.va.vinci.leo.tools.ConfigurationParameterImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.uima.UimaContext;
@@ -13,6 +14,8 @@ import org.apache.uima.jcas.JCas;
 import org.apache.uima.jcas.tcas.Annotation;
 import org.apache.uima.resource.ResourceInitializationException;
 import org.apache.uima.resource.metadata.ConfigurationParameter;
+import org.apache.uima.resource.metadata.TypeDescription;
+import org.apache.uima.resource.metadata.impl.TypeDescription_impl;
 
 import java.io.File;
 import java.io.IOException;
@@ -40,6 +43,11 @@ public abstract class BaseConTextAnnotator extends LeoBaseAnnotator {
      * Name of the current configuration being used.
      */
     protected String currentConfigurationName = null;
+
+    /**
+     * Name of the default context type for this annotator
+     */
+    protected static String	CONTEXT_TYPE = "gov.va.vinci.leo.context.types.Context";
 
     /********************************
      * Annotator Parameter Variables
@@ -111,7 +119,33 @@ public abstract class BaseConTextAnnotator extends LeoBaseAnnotator {
      *
      * @param contextAnnotation Annotation instance whose context features will be determined
      */
-    public abstract void applyContext(Annotation contextAnnotation);
+    public abstract void applyContext(Annotation contextAnnotation) throws AnalysisEngineProcessException;
+
+    @Override
+    public LeoTypeSystemDescription getLeoTypeSystemDescription() {
+        return getLeoTypeSystemDescription(CONTEXT_TYPE);
+    }
+
+    /**
+     * Create the Annotation Type System for the the Annotator.
+     *
+     * @param type String that is the Parent type
+     * @return LeoTypeSystemDescription object with the specific types.
+     */
+    public LeoTypeSystemDescription getLeoTypeSystemDescription(String type) {
+        TypeDescription parentAnnotation = new TypeDescription_impl(type, "", "uima.tcas.Annotation");
+        parentAnnotation.addFeature("Experiencer", "", "uima.cas.String");
+        parentAnnotation.addFeature("ExperiencerPattern", "", "uima.cas.String");
+        parentAnnotation.addFeature("Negation", "", "uima.cas.String");
+        parentAnnotation.addFeature("NegationPattern", "", "uima.cas.String");
+        parentAnnotation.addFeature("Temporality", "", "uima.cas.String");
+        parentAnnotation.addFeature("TemporalityPattern", "", "uima.cas.String");
+        parentAnnotation.addFeature("Window", "", "uima.tcas.Annotation");
+
+        LeoTypeSystemDescription ftsd = new LeoTypeSystemDescription();
+        ftsd.addType(parentAnnotation);
+        return ftsd;
+    }
 
     /**
      * A set of parameter definitions for this annotator.
