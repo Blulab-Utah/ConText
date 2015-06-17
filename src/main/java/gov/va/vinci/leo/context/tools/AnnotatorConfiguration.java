@@ -9,6 +9,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.LinkedHashMap;
 import java.util.Map;
+import java.util.Set;
 
 /**
  * Stores one or more configurations to be used by an annotator, including configurations pulled from a groovy config file.
@@ -18,19 +19,43 @@ import java.util.Map;
  * Time: 11:54
  */
 public class AnnotatorConfiguration {
+    /**
+     * Name of the annotator set by the configuration file.
+     */
     private String annotatorName = null;
+    /**
+     * Default configuration parameters.
+     */
     private ConfigObject defaults;
+    /**
+     * Map of configuration names to a map of parameters for the annotator.
+     */
     private Map<String, Map> configurationNameParametersMap = new LinkedHashMap<String, Map>();
 
+    /**
+     * Default constructor.
+     */
     public AnnotatorConfiguration() {
         this.defaults = new ConfigObject();
         this.annotatorName = LeoUtils.getUUID();
     }
 
+    /**
+     * Initialize one or more configurations from a groovy configuration file.
+     *
+     * @param configurationFile
+     * @throws IOException
+     */
     public AnnotatorConfiguration(File configurationFile) throws IOException {
         parseConfiguration(configurationFile);
     }
 
+    /**
+     * Parse the groovy configuration file to retrieve the parameters for the annotator.
+     *
+     * @param configurationFile
+     * @throws IOException
+     */
     protected void parseConfiguration(File configurationFile) throws IOException {
         ConfigSlurper configSlurper = new ConfigSlurper();
         ConfigObject configObject = new ConfigSlurper().parse(FileUtils.readFileToString(configurationFile));
@@ -63,6 +88,12 @@ public class AnnotatorConfiguration {
         }
     }
 
+    /**
+     * Merge default parameter values for parameters that have not been set on the configuration.
+     *
+     * @param config configuration to merge
+     * @param defaults default parameters to merge
+     */
     protected void mergeDefaults(ConfigObject config, ConfigObject defaults) {
         for(Object defaultKey : defaults.keySet()) {
             if(!config.containsKey(defaultKey)) {
@@ -106,7 +137,31 @@ public class AnnotatorConfiguration {
     }
 
     /**
-     * TODO: Finish documenting and then add the GETTER methods the annotator will use.
+     * Get the list of configuration names.
+     *
+     * @return a list of configuration names.
      */
+    public Set<String> getConfigNames() {
+        return configurationNameParametersMap.keySet();
+    }
+
+    /**
+     * Retrieve the parameters for the configuration with the annotatorName label.
+     *
+     * @return Map of parameters with String key to Object value
+     */
+    public Map getParameters() {
+        return this.getParameters(this.annotatorName);
+    }
+
+    /**
+     * Return a map of parameters for the named configuration.
+     *
+     * @param configurationName Name of the configuration whose parameters will be retrieved
+     * @return Map of parameters for the configuration with String key to Object value
+     */
+    public Map getParameters(String configurationName) {
+        return configurationNameParametersMap.get(configurationName);
+    }
 
 }
