@@ -133,6 +133,7 @@ public class AnnotatorConfiguration {
         if(configuration.get(parameter) == null || overwrite) {
             configuration.put(parameter, value);
         }
+        configurationNameParametersMap.put(configurationName, configuration);
         return this;
     }
 

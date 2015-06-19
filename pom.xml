@@ -41,7 +41,7 @@
         <dependency>
             <groupId>gov.va.vinci.leo</groupId>
             <artifactId>leo-service</artifactId>
-            <version>2014.08.0</version>
+            <version>2015.04.0</version>
         </dependency>
         <dependency>
             <groupId>gov.va.vinci</groupId>
@@ -79,6 +79,18 @@
             <version>2.0.16</version>
             <scope>test</scope>
         </dependency>
+        <dependency>
+            <groupId>gov.va.vinci</groupId>
+            <artifactId>leo-regex</artifactId>
+            <version>2015.03.1</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>gov.va.vinci</groupId>
+            <artifactId>leo-window</artifactId>
+            <version>2015.02.1</version>
+            <scope>test</scope>
+        </dependency>
 
     </dependencies>
 
@@ -94,43 +106,19 @@
 
 
         <plugins>
-            <!--
-                 This is the groovy plugin that is used for pre-processing of the
-                site markdown files to update the build number, etc...
-             -->
             <plugin>
-                <groupId>org.codehaus.gmavenplus</groupId>
-                <artifactId>gmavenplus-plugin</artifactId>
-                <version>1.2</version>
+                <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
                     <execution>
-                        <phase>pre-site</phase>
+                        <phase>package</phase>
                         <goals>
-                            <goal>execute</goal>
+                            <goal>copy-dependencies</goal>
                         </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/lib</outputDirectory>
+                        </configuration>
                     </execution>
                 </executions>
-                <configuration>
-                    <properties>
-                        <property>
-                            <name>buildVersion</name>
-                            <value>${project.version}</value>
-                        </property>
-                    </properties>
-                    <scripts>
-                        <script>file:///${session.executionRootDirectory}/src/site/groovyScripts/prepSite.groovy
-                        </script>
-                    </scripts>
-                </configuration>
-                <dependencies>
-                    <dependency>
-                        <groupId>org.codehaus.groovy</groupId>
-                        <artifactId>groovy-all</artifactId>
-                        <!-- any version of Groovy \>= 1.5.0 should work here -->
-                        <version>2.3.0</version>
-                        <scope>runtime</scope>
-                    </dependency>
-                </dependencies>
             </plugin>
         </plugins>
 

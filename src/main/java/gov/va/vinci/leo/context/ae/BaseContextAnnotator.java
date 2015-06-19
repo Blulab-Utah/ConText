@@ -169,6 +169,6 @@ public abstract class BaseConTextAnnotator extends LeoBaseAnnotator {
         public static ConfigurationParameter CONCEPT_FEATURE_NAME
                 = new ConfigurationParameterImpl("conceptFeatureName",
                                                  "String name of the feature in the input types that contain the concept annotation. The default feature name is \"Anchor\"",
-                                                 "String", false, false, new String[] {});
+                                                 "String", false, false, new String[0]);
     }
 }

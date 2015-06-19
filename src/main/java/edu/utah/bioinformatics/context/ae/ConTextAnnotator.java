@@ -51,4 +51,8 @@ public class ConTextAnnotator extends BaseConTextAnnotator {
             throw new AnalysisEngineProcessException(e);
         }
     }
+
+    public static class Param extends BaseConTextAnnotator.Param {
+        /** Not adding additional parameters but extending parent parameters for inheritance **/
+    }
 }
